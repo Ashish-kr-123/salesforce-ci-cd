@@ -1,0 +1,18 @@
+<template>
+    <div>
+        <template if:true={showStartButton}>
+            <lightning-button 
+                label="Start Countdown" 
+                onclick={startCountdown}>
+            </lightning-button>
+        </template>
+
+        <template if:true={showCountdown}>
+            <p>Time remaining: {seconds} seconds</p>
+        </template>
+
+        <template if:true={showCompletedMessage}>
+            <p>Countdown completed!</p>
+        </template>
+    </div>
+</template>

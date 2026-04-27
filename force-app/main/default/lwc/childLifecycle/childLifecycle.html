@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="Child Components - Accounts" icon-name="standard:account">
+        <div class="slds-p-around_medium">
+            <template if:true ={accounts}>
+                <template for:each = {accounts} for:item = "acc">
+                     <p key={acc.Id}>🔹 {acc.Name} - ({acc.Rating})</p>
+                    </template>
+            </template>
+            <template if:true = {error}>
+                <p style="color: red;">error fetching accounts!</p>
+            </template>
+        </div>
+    </lightning-card>    
+    
+</template>

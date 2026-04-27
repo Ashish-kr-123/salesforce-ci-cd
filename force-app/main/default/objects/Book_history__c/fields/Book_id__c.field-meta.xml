@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Book_id__c</fullName>
+    <displayFormat>BT-{0000}</displayFormat>
+    <externalId>false</externalId>
+    <label>Book id</label>
+    <trackTrending>false</trackTrending>
+    <type>AutoNumber</type>
+</CustomField>

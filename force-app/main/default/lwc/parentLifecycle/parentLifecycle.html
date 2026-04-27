@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Parent Component" icon-name="utility:people">
+        <div class="slds-m-around_medium">
+            <lightning-button 
+                label={buttonLabel
+                onclick={toggleChild}>
+            </lightning-button>
+
+            <template if:true={showChild}>
+                <c-child-lifecycle></c-child-lifecycle>
+            </template>
+        </div>
+    </lightning-card>
+</template>

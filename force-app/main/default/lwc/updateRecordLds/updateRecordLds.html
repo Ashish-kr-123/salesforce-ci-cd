@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title="Update Record" icon-name="standard:account">
+        <div class="slds-p-around_medium">
+            <lightning-input
+                name="name"
+                label="Name"
+                value={name}
+                onchange={handleChange}>
+            </lightning-input>
+            <lightning-input
+                name="rating"
+                label="Rating"
+                value={rating}
+                onchange={handleChange}>
+            </lightning-input>
+            <lightning-input
+                name="industry"
+                label="Industry"
+                value={industry}
+                onchange={handleChange}>
+            </lightning-input>"
+            <lightning-button
+                label="Update Record"
+                variant="brand"
+                onclick={handleSave}
+                class="slds-m-top_medium">
+            </lightning-button>
+        </div>
+    </lightning-card>
+</template>

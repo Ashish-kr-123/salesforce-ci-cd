@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <assignments>
+        <name>desc_cold</name>
+        <label>desc cold</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Description</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>cold</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>desc_hot</name>
+        <label>desc hot</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Description</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>hot </stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>desc_warm</name>
+        <label>desc warm</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Description</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>warm</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>check_rating</name>
+        <label>check rating</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>if_hot</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Rating</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Hot</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>desc_hot</targetReference>
+            </connector>
+            <label>if hot</label>
+        </rules>
+        <rules>
+            <name>if_warm</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Rating</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Warm</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>desc_warm</targetReference>
+            </connector>
+            <label>if warm</label>
+        </rules>
+        <rules>
+            <name>if_cold</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Rating</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Cold</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>desc_cold</targetReference>
+            </connector>
+            <label>if cold</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <interviewLabel>desc value save as rating {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>desc value save as rating</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>check_rating</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Rating</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>Account</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Obsolete</status>
+</Flow>

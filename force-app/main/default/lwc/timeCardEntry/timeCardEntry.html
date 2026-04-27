@@ -1,0 +1,114 @@
+<template>
+    <lightning-card title="Timecard Entry" icon-name="standard:timesheet">
+        <div class="slds-p-around_medium">
+
+            <p class="slds-text-body_regular slds-m-bottom_medium">
+                <strong>Selected Date : </strong>
+                <span class="slds-text-color_brand">{selectedDate}</span>
+            </p>
+
+            <template if:true={timecards}>
+                <template for:each={timecards} for:item="tc">
+                    <div key={tc.id} class="slds-box slds-box_x-small slds-m-bottom_medium slds-theme_default">
+
+                        <!-- Row 1: Task Name + Status -->
+                        <div class="slds-grid slds-wrap slds-m-bottom_small">
+                            <div class="slds-col slds-size_1-of-2 slds-p-right_x-small">
+                                <lightning-combobox
+                                    name="taskName"
+                                    label="Task Name"
+                                    placeholder="Select Task Name"
+                                    value={tc.taskName}
+                                    data-id={tc.id}
+                                    options={taskNameOptions}
+                                    onchange={handleChange}
+                                    required>
+                                </lightning-combobox>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-2 slds-p-left_x-small">
+                                <lightning-combobox
+                                    name="status"
+                                    label="Status"
+                                    placeholder="Select Status"
+                                    value={tc.status}
+                                    data-id={tc.id}
+                                    options={statusOptions}
+                                    onchange={handleChange}
+                                    required>
+                                </lightning-combobox>
+                            </div>
+                        </div>
+
+                        <!-- Row 2: Hours (small) + User Story (big) -->
+                        <div class="slds-grid slds-wrap slds-m-bottom_small">
+                            <div class="slds-col slds-size_1-of-2 slds-p-right_x-small">
+                                <lightning-input
+                                    type="number"
+                                    name="hours"
+                                    label="Hours"
+                                    value={tc.hours}
+                                    data-id={tc.id}
+                                    onchange={handleChange}
+                                    required>
+                                </lightning-input>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-2 slds-p-left_x-small">
+                                <lightning-input
+                                    type="text"
+                                    name="userStory"
+                                    label="User Story"
+                                    value={tc.userStory}
+                                    data-id={tc.id}
+                                    onchange={handleChange}
+                                    required>
+                                </lightning-input>
+                            </div>
+                        </div>
+
+                        <!-- Row 3: Delete Icon -->
+                        <div class="slds-grid slds-grid_align-start">
+                            <lightning-button-icon
+                                icon-name="utility:delete"
+                                alternative-text="Delete"
+                                title="Delete this timecard"
+                                variant="bare"
+                                size="large"
+                                class="slds-text-color_error"
+                                onclick={removeTimecard}
+                                data-id={tc.id}>
+                            </lightning-button-icon>
+                        </div>
+
+                    </div>
+                </template>
+            </template>
+
+            <template if:false={timecards}>
+                <p class="slds-text-color_weak slds-text-align_center slds-m-vertical_medium">
+                    No timecard entries yet.
+                </p>
+            </template>
+
+            <!-- Footer Buttons: Left aligned -->
+            <div class="slds-m-top_large slds-grid slds-grid_align-start slds-grid_vertical-align-center">
+                
+                <lightning-button-icon
+                    icon-name="utility:add"
+                    alternative-text="Add Timecard"
+                    title="Add Timecard"
+                    onclick={addTimecard}
+                    class="slds-m-right_small">
+                </lightning-button-icon>
+
+                <lightning-button
+                    label="Create Timecards"
+                    variant="brand"
+                    onclick={handleSave}>
+                </lightning-button>
+            </div>
+
+        </div>
+    </lightning-card>
+</template>

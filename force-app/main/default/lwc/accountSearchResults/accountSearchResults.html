@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Search Results">
+        <template if:true={accounts}>
+            <lightning-datatable 
+            key-field="Id" 
+            data={accounts} 
+            columns={columns}>
+            </lightning-datatable>
+        </template>
+        <template if:false={accounts}>
+            <p>No results found.</p>
+        </template>
+    </lightning-card> 
+</template>

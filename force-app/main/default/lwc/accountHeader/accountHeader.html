@@ -1,0 +1,10 @@
+<template>
+    HYIIII
+    <template if:true={account.data}>
+        <h2>{name}</h2>
+        <p>Industry: {industry}</p>
+    </template>
+    <template if:true={account.error}>
+        <p class="slds-text-color_error">Error loading account.</p>
+    </template>
+</template>

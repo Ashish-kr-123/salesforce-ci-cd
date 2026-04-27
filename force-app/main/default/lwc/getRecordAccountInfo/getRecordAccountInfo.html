@@ -1,0 +1,16 @@
+<template>
+    <div class="slds-align_absolute-center">
+        <lightning-card title="Account Info">
+            <template if:true={account}>
+                <div class="slds-text-align_center">
+                    <p><strong> Name : </strong> {name}</p>
+                    <p><strong> Phone : </strong> {phone}</p>
+                    <p><strong> Industry : </strong> {industry}</p>
+                    </div>
+            </template>
+            <template if:true={error}>
+                <p>Error loading account: {error.message}</p>
+            </template>
+        </lightning-card>
+    </div>
+</template>

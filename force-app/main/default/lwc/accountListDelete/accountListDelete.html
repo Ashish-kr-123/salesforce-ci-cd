@@ -1,0 +1,35 @@
+<template>
+    <lightning-card title="Account List">
+        <template if:true={accounts}>
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Rating</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={accounts} for:item="acc">
+                        <tr key={acc.Id}>
+                            <td>{acc.Name}</td>
+                            <td>{acc.Rating}</td>
+                            <td>
+                                <lightning-button
+                                    label="Delete"
+                                    value={acc.Id}
+                                    title="Delete Account"
+                                    variant="destructive"
+                                    onclick={handleDelete}>
+                                </lightning-button>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </template>
+        <template if:false={accounts}>
+            <p class="slds-p-around_medium">No Accounts found.</p>
+        </template>
+    </lightning-card>
+</template>

@@ -1,0 +1,37 @@
+<template>
+    <lightning-card title="Working Days" icon-name="standard:timesheet">
+        <div class="slds-p-around_medium">
+            <template if:true={workingDays}>
+                <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                    <thead>
+                        <tr class="slds-text-title_bold">
+                            <th>Select</th>
+                            <th>Date</th>
+                            <th>Day</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={workingDays} for:item="day">
+                            <tr key={day.date}>
+                                <td>
+                                    <lightning-input 
+                                        type="radio" 
+                                        name="daySelector"
+                                        data-date={day.date}   
+                                        onchange={handleDaySelect}>   <!-- ISO format date for backend -->
+                                    </lightning-input>
+                                </td>
+                                <td>{day.displayDate}</td>   <!-- User-friendly format -->
+                                <td>{day.label}</td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </template>
+
+            <template if:false={workingDays}>
+                <p>Please select a timesheet to view working days.</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

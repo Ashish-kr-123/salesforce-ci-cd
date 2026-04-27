@@ -1,0 +1,11 @@
+<template>
+    <template if:true={industryValues.data}>
+        <lightning-combobox
+            label="Industry"
+            options={options}>
+        </lightning-combobox>
+    </template>
+    <template if:true={industryValues.error}>
+        <p class="slds-text-color_error">Could not load picklist.</p>
+    </template>
+</template>

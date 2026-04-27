@@ -1,0 +1,31 @@
+<template>
+    <c-timesheet1st-comp 
+        onfilterchange={handleFilterChange}>
+    </c-timesheet1st-comp>
+
+    <c-timesheet-records 
+        month={selectedMonth} 
+        year={selectedYear}
+        onrecordselect={handleRecordSelect}>
+    </c-timesheet-records>
+    
+    <template if:true={showWorkingDays}>
+        <c-timesheet-working-days
+            start-date={selectedStartDate}
+            end-date={selectedEndDate}
+            ondayselect={handleDaySelect}>
+        </c-timesheet-working-days>
+    </template>
+    
+    <template if:true={showTimeCard}>
+        <!-- <div class="slds-m-top_medium">  -->
+            <c-time-card-entry
+                selected-date ={selectedWorkingDay}
+                timesheet-id={selectedTimesheetId}
+                ontimecardsaved={handleTimecardSaved}>
+            </c-time-card-entry>
+
+            <c-time-card-records lwc:ref="timecardRecords"></c-time-card-records>
+
+    </template>
+</template>

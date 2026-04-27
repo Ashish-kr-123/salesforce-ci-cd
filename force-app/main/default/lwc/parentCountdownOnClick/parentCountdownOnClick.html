@@ -1,0 +1,11 @@
+<template>
+    <lightning-card title = "Parrent Wrapper">
+        <div class="slds-p-around_medium">
+            <lightning-button label={toggleLabel} onclick={toggleChild}></lightning-button>
+        </div>
+
+        <template if:true={showChild}>
+            <c-countdown-on-click></c-countdown-on-click>
+        </template>
+    </lightning-card>
+</template>

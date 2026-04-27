@@ -1,0 +1,55 @@
+<template>
+    <lightning-card title="Timesheet Records" icon-name="standard:timesheet">
+        <div class="slds-p-around_medium">
+
+            <template if:false={noRecords}>
+                <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th>Select</th>
+                            <th>Name</th>
+                            <th>Week Start Date</th>
+                            <th>Week End Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={timesheets} for:item="ts">
+                            <tr key={ts.Id}>
+                                <td>
+                                    <lightning-input 
+                                        type="radio" 
+                                        name="recordSelector"
+                                        data-id={ts.Id}
+                                        onchange={handleRadioChange}>
+                                    </lightning-input>
+                                </td>
+                                <td>{ts.Name}</td>
+                                <td>{ts.Week_Start_Date__c}</td>
+                                <td>{ts.Week_End_Date__c}</td>
+                                <td>{ts.Status__c}</td>
+                                <td>
+                                    <lightning-button 
+                                        label="Submit" 
+                                        variant="brand"
+                                        disabled={ts.isSubmitted}
+                                        data-id={ts.Id}
+                                        onclick={handleActionClick}>
+                                    </lightning-button>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </template>
+            
+            <template if:true={noRecords}>
+                <p class="slds-text-color_error slds-text-heading_small">
+                    No timesheets found for the selected month and year.
+                </p>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

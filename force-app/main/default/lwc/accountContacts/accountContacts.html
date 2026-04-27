@@ -1,0 +1,12 @@
+<template>
+    <template if:true={contacts}>
+        <lightning-card title="Related Contacts">
+            <template for:each={contacts} for:item="contact">
+                <p key={contact.Id}>{contact.FirstName} {contact.LastName} - {contact.Email}</p>
+            </template>
+        </lightning-card>
+    </template>
+    <template if:true={error}>
+        <p>Error loading contacts: {error.message}</p>
+    </template>
+</template>

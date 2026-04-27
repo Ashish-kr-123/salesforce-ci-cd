@@ -1,0 +1,10 @@
+<template>
+    <lightning-card title="Recent Timecards" icon-name="standard:timesheet">
+        <lightning-datatable
+            key-field="Id"
+            data={timecardList}
+            columns={columns}
+            hide-checkbox-column>
+        </lightning-datatable>
+    </lightning-card>
+</template>

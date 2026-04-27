@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title="Timesheet Project" icon-name="standard:timesheet">
+        <div class="slds-p-around_medium">
+            <div class="picklist-row">
+                <lightning-combobox
+                    name="month"
+                    label="Month"
+                    value={selectedMonth}
+                    options={monthOptions}
+                    placeholder="Select Month"
+                    onchange={handleMonthChange}>
+                </lightning-combobox>
+
+                <lightning-combobox
+                    name="year"
+                    label="Year"
+                    value={selectedYear}
+                    options={yearOptions}
+                    placeholder="Select Year"
+                    onchange={handleYearChange}>
+                </lightning-combobox>
+            </div>
+        </div>
+
+        <div class="slds-p-around_medium">
+            <lightning-button
+                label="Submit"
+                variant="brand"
+                onclick={handleSubmit}>
+            </lightning-button>
+        </div>
+    </lightning-card>
+</template>

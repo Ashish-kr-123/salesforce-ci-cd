@@ -1,0 +1,34 @@
+<template>
+    <lightning-card title ="Search Accounts">
+        <div class="slds-p-horizontal_medium">
+        <lightning-input 
+            label="Name" 
+            value={name} 
+            onchange={handleNameChange}>
+        </lightning-input>
+        <lightning-combobox 
+            label="Rating" 
+            value={rating} 
+            options={ratingOptions} 
+            onchange={handleRatingChange}>
+        </lightning-combobox>
+        <lightning-combobox
+            label="Type"
+            value={type}
+            options={typeOptions}
+            onchange={handleTypeChange}>
+        </lightning-combobox>
+        <lightning-combobox
+            label="Industry"
+            value={industry}
+            options={industryOptions}
+            onchange={handleIndustryChange}>
+        </lightning-combobox>
+        <lightning-button 
+            variant="brand" 
+            label="Search" 
+            onclick={handleSearch}>
+        </lightning-button>
+        </div>
+    </lightning-card>
+</template>
