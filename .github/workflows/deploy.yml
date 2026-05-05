@@ -10,25 +10,41 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Checkout code
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      # 2. Install latest Salesforce CLI
       - name: Install Salesforce CLI
-        run: npm install sfdx-cli --global
+        run: npm install @salesforce/cli --global
 
+      # 3. Authenticate Target Org (FIXED)
       - name: Authenticate Target Org
         run: |
           echo "${{ secrets.SF_AUTH_URL }}" > auth.txt
-          sfdx auth:sfdxurl:store -f auth.txt -a targetOrg
+          sf org login sfdx-url -f auth.txt -a targetOrg -s
 
+      # 4. Validate Deployment (Dry Run)
       - name: Validate Deployment (Dry Run)
         run: |
-          sfdx force:source:deploy -p force-app -u targetOrg --checkonly --wait 10
+          sf project deploy start \
+            --source-dir force-app \
+            --target-org targetOrg \
+            --dry-run \
+            --wait 10
 
+      # 5. Deploy to Target Org
       - name: Deploy to Target Org
         run: |
-          sfdx force:source:deploy -p force-app -u targetOrg --wait 10
+          sf project deploy start \
+            --source-dir force-app \
+            --target-org targetOrg \
+            --wait 10
 
+      # 6. Run Apex Tests
       - name: Run Apex Tests
         run: |
-          sfdx force:apex:test:run -u targetOrg --wait 10 --resultformat human
+          sf apex test run \
+            --target-org targetOrg \
+            --wait 10 \
+            --result-format human
