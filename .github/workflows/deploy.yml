@@ -1,0 +1,34 @@
+name: Salesforce CI/CD Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install Salesforce CLI
+        run: npm install sfdx-cli --global
+
+      - name: Authenticate Target Org
+        run: |
+          echo "${{ secrets.SF_AUTH_URL }}" > auth.txt
+          sfdx auth:sfdxurl:store -f auth.txt -a targetOrg
+
+      - name: Validate Deployment (Dry Run)
+        run: |
+          sfdx force:source:deploy -p force-app -u targetOrg --checkonly --wait 10
+
+      - name: Deploy to Target Org
+        run: |
+          sfdx force:source:deploy -p force-app -u targetOrg --wait 10
+
+      - name: Run Apex Tests
+        run: |
+          sfdx force:apex:test:run -u targetOrg --wait 10 --resultformat human
